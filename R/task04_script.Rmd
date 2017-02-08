@@ -1,0 +1,90 @@
+---
+title: "task04_script"
+author: "Abby"
+date: "January 27, 2017"
+output: html_document
+---
+# Task 04 Geol 590 
+# ggplot2 script
+
+Load proper packages
+```{r}
+library(ggplot2)
+library(tidyverse)
+library(extrafont)
+```
+
+determine how many rows the diamonds data set has that comes with ggplot2
+```{r}
+nrow(diamonds)
+```
+There are 53940 rows in diamonds 
+
+Use the following code to create a reproducible subset of diamonds. Explain each line of the code in words.
+
+```{r}
+set.seed(1410)
+dsmall <- diamonds[sample(nrow(diamonds), 100), ]
+```
+set.seed(1410) sets the random number generator to start at 1410, if we had started at 10 it would start at 10. 
+dsmall <- diamonds[sample(nrow(diamonds), 100), ] selects 100 random rows from the data table diamonds and returns a new smaller data frame. 
+
+###create scatter plots using gglot
+Use dsmall to create the following plots:
+A scatterplot of y vs x, colored by z values and faceted by cut 
+
+```{r cars}
+dsmallplot <- ggplot(dsmall,aes( x = x, y = y , colour = z))+
+  geom_point()+
+  facet_wrap(~cut)
+print(dsmallplot)
+```
+A scatterplot of price vs carat, colored by cut and smoothed (using the "lm" method, without standard error bars)
+```{r}
+pricecarat <- ggplot(dsmall, aes( x = price, y = carat, color = cut))+
+  geom_point()+
+  geom_smooth( method = "lm", se = FALSE)
+print(pricecarat)
+```
+
+A density plot of carat, faceted and colored by clarity
+```{r}
+densityplot <-ggplot(dsmall, aes(carat, color = clarity))+
+  geom_density()+
+  facet_wrap(~clarity)
+print(densityplot)
+```
+A boxplot of price as a function of cut 
+```{r}
+box <- ggplot(dsmall, aes( x = cut, y = price))+
+  geom_boxplot()
+print(box)
+```
+
+A scatterplot of y versus x. The points should be red (colour = "red"), the color of the smoothing line should be blue (colour = "blue"), and the line should be dashed with fat dashes (linetype=2). The x and y labels should be set manually as well. The trickiest part of this may be to figure out where colour = "red" etc should go in the code. Think about mapped vs static aesthetic values.
+```{r}
+xycolor <- ggplot(dsmall, aes(x = x, y = y))+
+  geom_point(color = "red")+
+  geom_smooth(method = "lm", se = FALSE, color = "blue", linetype =2)
+print(xycolor)
+```
+##Ugly Plot Contest 
+Make the worst plot you possibly can in ggplot2. This plot should be awful in two independent respects: * It should represent the data misleadingly (this can sometimes be difficult with ggplot2, but be creative) * It should be as ugly as possible. (theme will be helpful here.) **Print this plot out and bring it in on Friday. We'll make a gallery of bad plots and the 'winner' will get a prize.
+
+```{r}
+set.seed(1410)
+datasmall <- diamonds[sample(nrow(diamonds), 2500), ]
+
+uglyplot<-ggplot(datasmall, aes(x = carat, y = price, color= clarity, label = color, shape = cut))+
+  geom_point( size =1)+
+  geom_text(aes(label = ifelse(carat<1.2, as.character(color), '')), hjust=0, vjust=0)+
+  ggtitle("[Price per Carat]")+
+  xlab("carat")+
+  ylab("price")+
+  theme(text=element_text(size=25, family="Blanche de la Fontaine"), panel.background =element_rect("darkolivegreen"))+
+  scale_colour_brewer(palette = "Set1")
+print(uglyplot)
+
+  
+```
+
