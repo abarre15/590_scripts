@@ -2,7 +2,11 @@
 title: "task05_script"
 author: "Abby"
 date: "February 13, 2017"
+<<<<<<< HEAD
 output: md_document
+=======
+output: html_document
+>>>>>>> 150aedb2514d98b146afcb5a40c75585c7ebbf91
 ---
 #Task 5- Making R Markdown with Mtcars 
 Load necessary packages 
@@ -19,12 +23,18 @@ print(med)
 ```
 ##PLot some of the data to determine if there is a relationship between cyl and mpg 
 ```{r}
+<<<<<<< HEAD
 knitr::opts_chunk$set(fig.path = "plots/")
+=======
+>>>>>>> 150aedb2514d98b146afcb5a40c75585c7ebbf91
 cyl_mpg<-ggplot(mtcars, aes(x =cyl, y = mpg))+
   geom_point()+
   facet_wrap(~cyl)
 print(cyl_mpg)
+<<<<<<< HEAD
 
+=======
+>>>>>>> 150aedb2514d98b146afcb5a40c75585c7ebbf91
 ```
 
 ##results/discussion 
