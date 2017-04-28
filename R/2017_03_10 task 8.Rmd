@@ -1,0 +1,43 @@
+---
+title: "2017_03_10 task 8"
+author: "Abby"
+date: "March 10, 2017"
+output: html_document
+---
+write the function 
+```{r}
+col1 <- df$x
+col2 <- df$y 
+colreturn <- df$xy 
+
+multiply_function <- function(df, col1, col2, colreturn){
+  
+ #add error message 
+	if( class(col1) != "numeric" ){ stop('x is not a column')}
+	if( class(col2) != "numeric" ){ stop('x is not a column')}
+  if( class(df) != "numeric" ){ stop('x is not a data frame')}
+  
+  df[[colreturn]]<- df[[col1]] * (df[[col2]]*10)
+  df
+  
+}
+```
+
+## try the function 
+Load the packages
+```{r}
+library(tidyverse)
+library(ggplot2)
+
+multiply_function(diamonds, carat, price, return)
+
+```
+
+```{r}
+my_array <- (1:10^4)
+for_loop <- for( i in 1:10^4){
+  sum[i] <- sum([i])
+  print(sum[i])
+}
+print(i)
+
