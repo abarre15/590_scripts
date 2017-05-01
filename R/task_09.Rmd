@@ -1,0 +1,46 @@
+---
+title: "task_09"
+author: "Abby"
+date: "April 24, 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+install.packages("devtools")
+library("devtools")
+devtools::install_github("klutometis/roxygen")
+library(roxygen2)
+
+setwd("Task_09")
+create("steenlabmember")
+
+#' Are you a steen lab memnber?
+#'This function welcomes new steen lab members to the lab, if they are not members it tells them to become one. 
+#' @param yes are you a steen lab memmber? defaults to TRUE
+#'are_you_a_steen_lab_member()
+
+are_you_a_steen_lab_member <- function(yes = TRUE){
+  if( yes == TRUE){
+    print("Welcome to the Steen Lab")
+  }
+  else {
+    print("You should become one")
+  }
+  
+}
+setwd("./steenlabmember")
+document()
+
+setwd("..")
+install("steenlabmember")
+
+devtools::test()
+
+library(steenlabmember)
+test_that("respone is correct", {
+  expect_match("Welcome to the Steen Lab")
+})
+
+
+
+```
